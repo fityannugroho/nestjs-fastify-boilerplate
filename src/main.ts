@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -9,6 +10,13 @@ async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
+  );
+
+  // Validate all endpoints
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
   );
 
   // Start the server
