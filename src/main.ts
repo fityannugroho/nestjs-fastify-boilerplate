@@ -12,7 +12,10 @@ async function bootstrap() {
   );
 
   // Start the server
-  await app.listen(3000);
+  const host = process.env.HOST || '0.0.0.0';
+  const port = process.env.PORT || 3000;
+
+  await app.listen(port, host);
   console.log(`Server running on ${await app.getUrl()}`);
 }
 bootstrap();
