@@ -1,35 +1,45 @@
 import {
   registerDecorator,
+  type ValidationArguments,
   type ValidationOptions,
   ValidatorConstraint,
   type ValidatorConstraintInterface,
 } from 'class-validator';
 
 /**
- * Checks if value does not contain any symbols. Whitespace is allowed.
+ * Checks if value is a valid Nanoid (URL-safe ID).
+ * @param length The expected Nanoid length.
  * @param validationOptions The validation options.
  */
-export function IsNotSymbol(validationOptions?: ValidationOptions) {
+export function IsNanoid(
+  lengthOrOptions: number | ValidationOptions = 21,
+  validationOptions?: ValidationOptions,
+) {
+  const length = typeof lengthOrOptions === 'number' ? lengthOrOptions : 21;
+  const options =
+    typeof lengthOrOptions === 'number' ? validationOptions : lengthOrOptions;
+
   return (object: object, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
-      constraints: [],
+      constraints: [length],
       options: Object.assign(
         {
-          message: '$property must not contain any symbols except whitespace',
+          message: '$property must be a valid Nanoid',
         },
-        validationOptions,
+        options,
       ),
-      validator: IsNotSymbolConstraint,
+      validator: IsNanoidConstraint,
     });
   };
 }
 
-@ValidatorConstraint({ name: 'isNotSymbol' })
-export class IsNotSymbolConstraint implements ValidatorConstraintInterface {
-  validate(value: any): boolean {
-    const hasSymbolRegex = /[!-/:-@{-~!"^_`[\]\\]/g;
-    return typeof value === 'string' && !hasSymbolRegex.test(value);
+@ValidatorConstraint({ name: 'isNanoid' })
+export class IsNanoidConstraint implements ValidatorConstraintInterface {
+  validate(value: any, args: ValidationArguments): boolean {
+    const [length] = (args.constraints ?? []) as [number?];
+    const nanoidRegex = new RegExp(`^[A-Za-z0-9_-]{${length ?? 21}}$`);
+    return typeof value === 'string' && nanoidRegex.test(value);
   }
 }

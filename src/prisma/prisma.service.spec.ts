@@ -17,4 +17,15 @@ describe('PrismaService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('throws when DATABASE_URL is missing', () => {
+    const previousUrl = process.env.DATABASE_URL;
+    delete process.env.DATABASE_URL;
+
+    expect(() => new PrismaService()).toThrow(
+      'DATABASE_URL is required to initialize PrismaClient.',
+    );
+
+    process.env.DATABASE_URL = previousUrl;
+  });
 });
