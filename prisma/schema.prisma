@@ -8,7 +8,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql" // Change to your preferred database provider
+  provider = "mysql"
 }
 
 // Example model, remove or modify it as needed
