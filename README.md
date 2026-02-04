@@ -14,7 +14,7 @@ A modern NestJS boilerplate using Fastify as the HTTP server with Prisma ORM for
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node.js (v20+)
 - PostgreSQL database
 - pnpm (recommended)
 

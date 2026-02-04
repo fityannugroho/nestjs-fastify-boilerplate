@@ -4,6 +4,9 @@
   "description": "The NestJS boilerplate using fastify",
   "author": "fityannugroho <fityannugroho@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "type": "module",
   "scripts": {
     "build": "nest build",
