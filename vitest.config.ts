@@ -15,12 +15,7 @@ export default defineConfig({
   },
   plugins: [
     swc.vite({
-      jsc: {
-        transform: {
-          legacyDecorator: true,
-          decoratorMetadata: true,
-        },
-      },
+      module: { type: 'es6' },
     }),
     tsconfigPaths(),
   ],
