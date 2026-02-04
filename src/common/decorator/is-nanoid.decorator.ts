@@ -1,8 +1,8 @@
 import {
   registerDecorator,
-  ValidationOptions,
+  type ValidationOptions,
   ValidatorConstraint,
-  ValidatorConstraintInterface,
+  type ValidatorConstraintInterface,
 } from 'class-validator';
 
 /**
@@ -10,7 +10,7 @@ import {
  * @param validationOptions The validation options.
  */
 export function IsNotSymbol(validationOptions?: ValidationOptions) {
-  return function (object: object, propertyName: string) {
+  return (object: object, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
@@ -29,7 +29,7 @@ export function IsNotSymbol(validationOptions?: ValidationOptions) {
 @ValidatorConstraint({ name: 'isNotSymbol' })
 export class IsNotSymbolConstraint implements ValidatorConstraintInterface {
   validate(value: any): boolean {
-    const hasSymbolRegex = /[!-/:-@{-~!"^_`\[\]\\]/g;
+    const hasSymbolRegex = /[!-/:-@{-~!"^_`[\]\\]/g;
     return typeof value === 'string' && !hasSymbolRegex.test(value);
   }
 }
