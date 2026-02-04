@@ -33,7 +33,7 @@ importers:
         specifier: ^0.14.3
         version: 0.14.3
       pg:
-        specifier: ^8.11.3
+        specifier: ^8.18.0
         version: 8.18.0
       reflect-metadata:
         specifier: ^0.2.2
@@ -67,7 +67,7 @@ importers:
         specifier: ^25.2.0
         version: 25.2.0
       '@types/pg':
-        specifier: ^8.11.10
+        specifier: ^8.16.0
         version: 8.16.0
       '@types/supertest':
         specifier: ^6.0.3
