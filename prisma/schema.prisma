@@ -9,3 +9,10 @@ datasource db {
   provider = "mysql" // Change to your preferred database provider
   url      = env("DATABASE_URL")
 }
+
+// Example model, remove or modify it as needed
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
