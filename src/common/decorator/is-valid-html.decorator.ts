@@ -1,9 +1,9 @@
 import {
   registerDecorator,
-  ValidationArguments,
-  ValidationOptions,
+  type ValidationArguments,
+  type ValidationOptions,
   ValidatorConstraint,
-  ValidatorConstraintInterface,
+  type ValidatorConstraintInterface,
 } from 'class-validator';
 
 export const DEFAULT_ALLOWED_TAGS = [
@@ -36,7 +36,7 @@ export function IsValidHtml(
   allowedTags: string[] = DEFAULT_ALLOWED_TAGS,
   validationOptions?: ValidationOptions,
 ) {
-  return function (object: object, propertyName: string) {
+  return (object: object, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
