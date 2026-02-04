@@ -2,10 +2,17 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/prisma/generated"
 }
 
 datasource db {
-  provider = "mysql" // Change to your preferred database provider
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+// Example model, remove or modify it as needed
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
 }
