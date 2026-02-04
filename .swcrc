@@ -10,12 +10,12 @@
       "legacyDecorator": true,
       "decoratorMetadata": true
     },
-    "target": "es2021",
+    "target": "es2022",
     "keepClassNames": true,
     "loose": false
   },
   "module": {
-    "type": "commonjs"
+    "type": "es6"
   },
   "sourceMaps": true
 }
