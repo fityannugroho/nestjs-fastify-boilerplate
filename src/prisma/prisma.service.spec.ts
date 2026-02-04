@@ -28,4 +28,26 @@ describe('PrismaService', () => {
 
     process.env.DATABASE_URL = previousUrl;
   });
+
+  it('throws when DATABASE_URL is invalid', () => {
+    const previousUrl = process.env.DATABASE_URL;
+    process.env.DATABASE_URL = 'invalid-url';
+
+    expect(() => new PrismaService()).toThrow(
+      'DATABASE_URL must be a valid URL.',
+    );
+
+    process.env.DATABASE_URL = previousUrl;
+  });
+
+  it('throws when DATABASE_URL is not MySQL/MariaDB', () => {
+    const previousUrl = process.env.DATABASE_URL;
+    process.env.DATABASE_URL = 'postgresql://user:pass@localhost:5432/db';
+
+    expect(() => new PrismaService()).toThrow(
+      'DATABASE_URL must be a MySQL/MariaDB connection string for MariaDB adapter.',
+    );
+
+    process.env.DATABASE_URL = previousUrl;
+  });
 });

@@ -5,7 +5,7 @@
   "author": "fityannugroho <fityannugroho@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist && prisma generate",
     "build": "nest build",
     "format": "biome format --write src test prisma.config.ts",
     "start": "nest start",
