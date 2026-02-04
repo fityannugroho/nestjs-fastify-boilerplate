@@ -2,12 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/prisma/generated"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "mysql" // Change to your preferred database provider
-  url      = env("DATABASE_URL")
 }
 
 // Example model, remove or modify it as needed
