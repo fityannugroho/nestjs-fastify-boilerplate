@@ -1,7 +1,13 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "includes": ["**", "!!**/dist"] },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!!**/dist"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -21,8 +27,7 @@
       "suspicious": {
         "noExplicitAny": "off"
       }
-    },
-    "includes": ["**", "**/.eslintrc.js"]
+    }
   },
   "javascript": {
     "formatter": {
@@ -32,6 +37,8 @@
   "overrides": [],
   "assist": {
     "enabled": true,
-    "actions": { "source": { "organizeImports": "on" } }
+    "actions": {
+      "source": { "organizeImports": "on" }
+    }
   }
 }

@@ -10,7 +10,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "biome check --write src test",
+    "lint": "biome check --write",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
