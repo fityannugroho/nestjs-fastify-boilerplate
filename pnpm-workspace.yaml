@@ -4,7 +4,22 @@ allowBuilds:
   '@swc/core': true
   prisma: true
 
+minimumReleaseAgeExclude:
+  - fastify@5.12.4
+
 overrides:
   # prisma → @prisma/config resolves deepmerge-ts <8.0.0 (GHSA-ggr8-5vv4-36mx, high).
   # Transitive-only; project never imports deepmerge-ts directly.
   'deepmerge-ts@<8.0.0': '>=8.0.0'
+  # @nestjs/platform-fastify pins fastify to exactly 5.11.3, which is below the
+  # patched 5.12.1 (GHSA-w2qp-rph6-63g4, GHSA-3m5p-2c4r-xxw2, moderate).
+  # Transitive-only; project never imports fastify directly. Scoped to the single
+  # parent so other fastify consumers, if any, keep their own resolution. Safe
+  # because fastify 5.12.x stays in the same major line the parent declares.
+  '@nestjs/platform-fastify>fastify': '5.12.4'
+  # prisma pins mysql2 to exactly 3.15.3, below the patched >=3.23.1
+  # (GHSA-3f6p-5ww8-9rcr, high; GHSA-rgwj-5xj2-c3m3, moderate). Transitive-only;
+  # project never imports mysql2 directly. One entry covers both the direct
+  # prisma devDep and the @prisma/client → prisma chain. Safe because the pin
+  # stays in the mysql2 3.x line prisma declares.
+  'prisma>mysql2': '3.24.4'
