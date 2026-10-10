@@ -5,21 +5,44 @@ allowBuilds:
   prisma: true
 
 minimumReleaseAgeExclude:
-  - fastify@5.12.4
+  - fastify@5.12.5
 
 overrides:
   # prisma → @prisma/config resolves deepmerge-ts <8.0.0 (GHSA-ggr8-5vv4-36mx, high).
   # Transitive-only; project never imports deepmerge-ts directly.
   'deepmerge-ts@<8.0.0': '>=8.0.0'
-  # @nestjs/platform-fastify pins fastify to exactly 5.11.3, which is below the
-  # patched 5.12.1 (GHSA-w2qp-rph6-63g4, GHSA-3m5p-2c4r-xxw2, moderate).
+  # @nestjs/platform-fastify pins fastify to 5.11.x, which is below the patched
+  # 5.12.5 (GHSA-4mh8-r7rc-xpvc, moderate).
   # Transitive-only; project never imports fastify directly. Scoped to the single
   # parent so other fastify consumers, if any, keep their own resolution. Safe
   # because fastify 5.12.x stays in the same major line the parent declares.
-  '@nestjs/platform-fastify>fastify': '5.12.4'
+  '@nestjs/platform-fastify>fastify': '5.12.5'
   # prisma pins mysql2 to exactly 3.15.3, below the patched >=3.23.1
   # (GHSA-3f6p-5ww8-9rcr, high; GHSA-rgwj-5xj2-c3m3, moderate). Transitive-only;
   # project never imports mysql2 directly. One entry covers both the direct
   # prisma devDep and the @prisma/client → prisma chain. Safe because the pin
   # stays in the mysql2 3.x line prisma declares.
   'prisma>mysql2': '3.24.4'
+  # @nestjs/cli → @swc/cli resolves piscina 4.9.3, below the 4.9.4 patch
+  # (GHSA-67c8-pqhq-4rmx, critical). @swc/cli already declares piscina ^4.3.1,
+  # so the override stays in the major line the parent expects.
+  'piscina@4.9.3': '4.9.4'
+  # minimatch (via @swc/cli, @nestjs/cli, fork-ts-checker-webpack-plugin, glob)
+  # resolves brace-expansion 1.1.18 / 2.1.4 / 5.0.9, below the patched lines
+  # (GHSA-qhr7-859c-m2p7, GHSA-6j4f-fj2g-mc7p, GHSA-q2hr-2g5m-vwhr).
+  # One entry per installed major line; each line's parent accepts the newer
+  # minor, so only advisory-driven minimums move.
+  'brace-expansion@1.1.18': '1.1.21'
+  'brace-expansion@2.1.4': '2.1.7'
+  'brace-expansion@5.0.9': '5.0.12'
+  # ajv / ajv-formats / fast-json-stringify resolve fast-uri 4.1.4, below 4.2.1
+  # (GHSA-hrr3-gc8f-f4qj, GHSA-jvvf-x445-j334). Transitive-only; project never
+  # imports fast-uri directly. The 3.x copy found in the tree is untouched.
+  'fast-uri@<4.1.5': '4.2.2'
+  # @swc/cli → @xhmikosr/bin-wrapper resolves http-cache-semantics 4.2.0, below
+  # 4.3.0 (GHSA-ch52-4w7c-c8xp, high). Transitive-only devDependency chain.
+  'http-cache-semantics@4.2.0': '4.3.0'
+  # vitest / @vitest/coverage-v8 / unplugin-swc / vite-tsconfig-paths / prisma
+  # resolve source-map-js 1.2.1, below 1.2.2 (GHSA-68fv-2mgg-jv7q, high).
+  # Patch-only bump; the 1.x line these parents declare is preserved.
+  'source-map-js@1.2.1': '1.2.2'
