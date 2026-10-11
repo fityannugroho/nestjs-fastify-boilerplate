@@ -4,8 +4,7 @@ allowBuilds:
   '@swc/core': true
   prisma: true
 
-minimumReleaseAgeExclude:
-  - fastify@5.12.5
+minimumReleaseAgeExclude: []
 
 overrides:
   # prisma → @prisma/config resolves deepmerge-ts <8.0.0 (GHSA-ggr8-5vv4-36mx, high).
